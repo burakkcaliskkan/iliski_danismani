@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
+import '../localization/localization_helper.dart';
 import 'durumlar_screen.dart';
 import 'ai_danisman_screen.dart';
 
@@ -11,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primaryWhite,
       appBar: AppBar(
-        title: const Text("İlişki Yardımcısı"),
+        title: Text(LocalizationHelper.translate("dashboard_title")),
         backgroundColor: AppColors.primaryPink,
         automaticallyImplyLeading: false,
       ),
@@ -47,8 +48,8 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'İlişki Danışmanı',
+                  Text(
+                    LocalizationHelper.translate('ai_advisor_title'),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -56,8 +57,8 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Kişiselleştirilmiş ilişki tavsiyeleri al',
+                  Text(
+                    LocalizationHelper.translate('ai_advisor_subtitle'),
                     style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                   const SizedBox(height: 16),
@@ -78,7 +79,9 @@ class DashboardScreen extends StatelessWidget {
                         vertical: 12,
                       ),
                     ),
-                    child: const Text('Danışmanla Konuş'),
+                    child: Text(
+                      LocalizationHelper.translate('talk_to_advisor'),
+                    ),
                   ),
                 ],
               ),
@@ -107,8 +110,8 @@ class DashboardScreen extends StatelessWidget {
                     color: AppColors.primaryPink,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'İlişkilerim',
+                  Text(
+                    LocalizationHelper.translate('my_relationships'),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -116,8 +119,8 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'İlişki durumlarını yönet',
+                  Text(
+                    LocalizationHelper.translate('manage_relationships'),
                     style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                   const SizedBox(height: 16),
@@ -138,7 +141,9 @@ class DashboardScreen extends StatelessWidget {
                         vertical: 12,
                       ),
                     ),
-                    child: const Text('İlişkileri Görüntüle'),
+                    child: Text(
+                      LocalizationHelper.translate('view_relationships'),
+                    ),
                   ),
                 ],
               ),

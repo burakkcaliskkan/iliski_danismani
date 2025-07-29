@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 import '../services/auth_service.dart';
+import '../localization/localization_helper.dart';
 import 'dashboard_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -105,18 +106,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 80),
-            const Text(
-              'İlişki Yardımcısı',
+            Text(
+              LocalizationHelper.translate('app_title'),
               style: TextStyle(fontSize: 38, color: AppColors.textDark),
             ),
             const SizedBox(height: 28),
-            const Text(
-              'İlişkilerinde Daha Başarılı Ol',
+            Text(
+              LocalizationHelper.translate('onboarding_subtitle'),
               style: TextStyle(fontSize: 16, color: AppColors.textGray),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Hoş Geldin!',
+            Text(
+              LocalizationHelper.translate('onboarding_welcome'),
               style: TextStyle(fontSize: 16, color: AppColors.textGray),
             ),
             const Spacer(),
@@ -135,7 +136,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: _isLoading ? null : _handleAppleSignIn,
               child: _isLoading
                   ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('Apple ile Giriş Yap'),
+                  : Text(LocalizationHelper.translate('sign_in_with_apple')),
             ),
             const SizedBox(height: 15),
             ElevatedButton(
@@ -147,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: _isLoading ? null : _handleGoogleSignIn,
               child: _isLoading
                   ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('Google ile Giriş Yap'),
+                  : Text(LocalizationHelper.translate('sign_in_with_google')),
             ),
             const SizedBox(height: 100),
           ],

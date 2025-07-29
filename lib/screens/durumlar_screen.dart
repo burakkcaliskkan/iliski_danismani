@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
+import '../localization/localization_helper.dart';
 import 'durum_ekle_screen.dart';
 import 'profil_detay_screen.dart';
 import '../services/firestore_service.dart';
@@ -45,7 +46,7 @@ class _DurumlarScreenState extends State<DurumlarScreen> {
     return Scaffold(
       backgroundColor: AppColors.primaryWhite,
       appBar: AppBar(
-        title: const Text('İlişkilerim'),
+        title: Text(LocalizationHelper.translate('relationships_title')),
         backgroundColor: AppColors.primaryPink,
         actions: [
           IconButton(
@@ -65,9 +66,9 @@ class _DurumlarScreenState extends State<DurumlarScreen> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : statusList.isEmpty
-          ? const Center(
+          ? Center(
               child: Text(
-                'Henüz ilişki durumu eklenmemiş',
+                LocalizationHelper.translate('no_relationships'),
                 style: TextStyle(fontSize: 24, color: AppColors.textDark),
               ),
             )
@@ -116,15 +117,24 @@ class _DurumlarScreenState extends State<DurumlarScreen> {
                                   ),
                                 ),
                                 Text(
-                                  '${durum['yas']} yaşında',
+                                  '${durum['yas']} ${LocalizationHelper.translate('years_old')}',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey[600],
                                   ),
                                 ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  '${_translatePhysicalDistance(durum['fizikselMesafe'] ?? 'same_place')} • ${_translateEmotionalState(durum['duygusalDurum'] ?? 'friendly')}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey[500],
+                                  ),
+                                ),
+
                                 const SizedBox(height: 4),
                                 Text(
-                                  '${_translateStatus(durum['iliskiDurumu'])} • ${_translateCurrentStatus(durum['anlikDurum'])}',
+                                  '${_translateCommunicationLevel(durum['iletisimDurumu'] ?? 'no_contact')} • ${_translateMessagingSpeed(durum['mesajlasmaHizi'] ?? 'balanced')}',
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.grey[500],
@@ -143,37 +153,78 @@ class _DurumlarScreenState extends State<DurumlarScreen> {
     );
   }
 
-  String _translateStatus(String? status) {
+  String _translateCommunicationLevel(String? status) {
+    if (status == null)
+      return LocalizationHelper.translate('communication_custom');
+
     switch (status) {
-      case 'bekar':
-        return 'Bekar';
-      case 'evli':
-        return 'Evli';
-      case 'iliskisi_var':
-        return 'İlişkisi Var';
-      case 'karmasik':
-        return 'Karmaşık';
+      case 'no_contact':
+        return LocalizationHelper.translate('communication_no_contact');
+      case 'only_messages':
+        return LocalizationHelper.translate('communication_only_messages');
+      case 'first_meeting':
+        return LocalizationHelper.translate('communication_first_meeting');
+      case 'few_meetings':
+        return LocalizationHelper.translate('communication_few_meetings');
+      case 'flirty_signals':
+        return LocalizationHelper.translate('communication_flirty_signals');
       default:
-        return 'Bilinmiyor';
+        return LocalizationHelper.translate('communication_custom');
     }
   }
 
-  String _translateCurrentStatus(String? status) {
+  String _translateMessagingSpeed(String? status) {
+    if (status == null) return LocalizationHelper.translate('messaging_custom');
+
     switch (status) {
-      case 'sosyal_medya':
-        return 'Sadece Sosyal Medya';
-      case 'ilk_bulusma':
-        return 'İlk Buluşma';
-      case 'birkac_bulusma':
-        return 'Birkaç Buluşma';
-      case '6_ay_az':
-        return '6 Aydan Az';
-      case '1_yil_az':
-        return '1 Yıldan Az';
-      case '1_yil_fazla':
-        return '1 Yıldan Fazla';
+      case 'very_slow':
+        return LocalizationHelper.translate('messaging_very_slow');
+      case 'slow':
+        return LocalizationHelper.translate('messaging_slow');
+      case 'balanced':
+        return LocalizationHelper.translate('messaging_balanced');
+      case 'fast':
+        return LocalizationHelper.translate('messaging_fast');
+      case 'very_fast':
+        return LocalizationHelper.translate('messaging_very_fast');
       default:
-        return 'Yeni Durum';
+        return LocalizationHelper.translate('messaging_custom');
+    }
+  }
+
+  String _translatePhysicalDistance(String? status) {
+    if (status == null) return LocalizationHelper.translate('distance_custom');
+
+    switch (status) {
+      case 'same_place':
+        return LocalizationHelper.translate('distance_same_place');
+      case 'walking_distance':
+        return LocalizationHelper.translate('distance_walking_distance');
+      case 'different_cities':
+        return LocalizationHelper.translate('distance_different_cities');
+      case 'different_countries':
+        return LocalizationHelper.translate('distance_different_countries');
+      default:
+        return LocalizationHelper.translate('distance_custom');
+    }
+  }
+
+  String _translateEmotionalState(String? status) {
+    if (status == null) return LocalizationHelper.translate('emotional_custom');
+
+    switch (status) {
+      case 'romantic':
+        return LocalizationHelper.translate('emotional_romantic');
+      case 'friendly':
+        return LocalizationHelper.translate('emotional_friendly');
+      case 'mixed':
+        return LocalizationHelper.translate('emotional_mixed');
+      case 'uncertain':
+        return LocalizationHelper.translate('emotional_uncertain');
+      case 'concerned':
+        return LocalizationHelper.translate('emotional_concerned');
+      default:
+        return LocalizationHelper.translate('emotional_custom');
     }
   }
 }

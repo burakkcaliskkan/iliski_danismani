@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
+import '../localization/localization_helper.dart';
 
 /// AI Advisor chat screen
 /// Provides a chat interface for relationship advice
@@ -16,7 +17,7 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('İlişki Danışmanı'),
+        title: Text(LocalizationHelper.translate('ai_advisor_title')),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
       ),
@@ -37,8 +38,8 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
                       color: Colors.purple[100],
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'Merhaba! Ben senin ilişki danışmanın. Nasıl yardımcı olabilirim?',
+                    child: Text(
+                      LocalizationHelper.translate('ai_greeting'),
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
@@ -53,8 +54,8 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
                       color: AppColors.primaryPink,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'İlişkim hakkında tavsiye istiyorum',
+                    child: Text(
+                      LocalizationHelper.translate('ai_user_message'),
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
@@ -69,8 +70,8 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
                       color: Colors.purple[100],
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'Tabii ki! İlişkin hakkında daha fazla bilgi verirsen sana daha iyi tavsiyeler verebilirim.',
+                    child: Text(
+                      LocalizationHelper.translate('ai_response'),
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
@@ -84,8 +85,8 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Hızlı Sorular',
+                Text(
+                  LocalizationHelper.translate('quick_questions'),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -97,10 +98,18 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    _buildQuickQuestion('Hediye Önerisi'),
-                    _buildQuickQuestion('Gidilecek Yer'),
-                    _buildQuickQuestion('Ne Söyleyeyim'),
-                    _buildQuickQuestion('İlişkiyi Güçlendir'),
+                    _buildQuickQuestion(
+                      LocalizationHelper.translate('gift_suggestion'),
+                    ),
+                    _buildQuickQuestion(
+                      LocalizationHelper.translate('place_to_go'),
+                    ),
+                    _buildQuickQuestion(
+                      LocalizationHelper.translate('what_to_say'),
+                    ),
+                    _buildQuickQuestion(
+                      LocalizationHelper.translate('strengthen_relationship'),
+                    ),
                   ],
                 ),
               ],
@@ -118,7 +127,7 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Mesajınızı yazın...',
+                      hintText: LocalizationHelper.translate('message_hint'),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -155,7 +164,9 @@ class _AiDanismanScreenState extends State<AiDanismanScreen> {
       onTap: () {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Seçildi: $question'),
+            content: Text(
+              '${LocalizationHelper.translate('selected')}: $question',
+            ),
             duration: const Duration(seconds: 1),
           ),
         );
